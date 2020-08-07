@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Prueba Persona</title>
+    </h:head>
+    <h:body>
+        <h:form id="PersonaForm">
+            <h:outputLabel id="lblCodigo" value="Codigo" ></h:outputLabel>
+            <h:inputText id="txtCodigo" value="#{personaController.persona.codigo}"></h:inputText>
+            <h:outputLabel id="lblNombre" value="Nombre" ></h:outputLabel>
+            <h:inputText id="txtNombre" value="#{personaController.persona.nombre}"></h:inputText>
+            <h:outputLabel id="lblFecha" value="Fecha" ></h:outputLabel>
+            <h:inputText id="txtFecha" value="#{personaController.persona.fecha_Nacimiento}">
+                <f:convertDateTime pattern="dd/mm/yyyy"></f:convertDateTime>
+            </h:inputText>
+            
+            <h:commandButton  value="Cargar" action="#{personaController.cargarPersona}">
+            </h:commandButton>
+            
+            <h:commandButton  value="Cargar Lista" action="#{personaController.cargarPersonaLista}">
+                <f:ajax render="tabPersona" execute="txtCodigo txtNombre txtFecha"/>
+            </h:commandButton>
+            
+            <h:dataTable id="tabPersona" var="persona" value="#{personaController.itemsPersona}">
+                <h:column>
+                <f:facet name="header">Codigo</f:facet>
+                #{persona.codigo}
+                </h:column>
+                <h:column>
+                <f:facet name="header">Nombre</f:facet>
+                #{persona.nombre}
+                </h:column>
+                <h:column>
+                <f:facet name="header">Fecha</f:facet>
+                <h:outputText value="#{persona.fecha_Nacimiento}">
+                    <f:convertDateTime pattern="dd/mm/yyyy"></f:convertDateTime>
+                </h:outputText>
+                
+                
+                </h:column>
+            </h:dataTable>
+            
+            <h:outputLabel id="lblValor1" value="Valor 1" ></h:outputLabel>
+            <h:inputText id="txtValor1" value="#{personaController.valor1}"></h:inputText>
+            
+            <h:outputLabel id="lblValor2" value="Valor2" ></h:outputLabel>
+            <h:inputText id="txtValor2" value="#{personaController.valor2}"></h:inputText>
+            
+            <h:commandButton  value="Sumar" action="#{personaController.generaSuma()}">
+                <f:ajax render="txtRespuesta" execute="txtValor1 txtValor2"/>
+            </h:commandButton>
+            
+            <h:outputLabel id="lblRespuesta" value="Respuesta" ></h:outputLabel>
+            <h:inputText id="txtRespuesta" value="#{personaController.respuesta}"></h:inputText>
+            
+        </h:form>
+    </h:body>
+</html>
+
